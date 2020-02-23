@@ -760,6 +760,9 @@ add_application_control (GvcMixerDialog *dialog, MateMixerStreamControl *control
                               NULL);
 
         app_icon = mate_mixer_app_info_get_icon (info);
+        guint32 source = mate_mixer_app_info_get_source (info);
+        guint32 index = mate_mixer_app_info_get_index (info);
+        g_print("name=%s, index=%d, source=%d\n", app_name, index, source);
         if (app_icon == NULL) {
                 if (direction == MATE_MIXER_DIRECTION_INPUT)
                         app_icon = "audio-input-microphone";
@@ -871,6 +874,9 @@ add_stream (GvcMixerDialog *dialog, MateMixerStream *stream)
                 control = mate_mixer_stream_get_default_control (stream);
                 if (G_LIKELY (control != NULL))
                         speakers = gvc_channel_map_to_pretty_string (control);
+                const gchar* name = mate_mixer_stream_control_get_name(control);
+                const gchar* label = mate_mixer_stream_control_get_label (control);
+                g_print(">>>>name=%s, label=%s\n", name, label);
         }
 
         controls = mate_mixer_stream_list_controls (stream);
